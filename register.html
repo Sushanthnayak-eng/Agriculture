@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agriconnect Register</title>
+    <link rel="stylesheet" href="register.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="glass-box">
+            <h2 class="title">Create Account</h2>
+            <p class="subtitle">Join Agriconnect and get started</p>
+            <form>
+                <div class="input-group">
+  <input type="text" required placeholder=" " />
+  <label>Full Name</label>
+</div>
+<div class="input-group">
+  <input type="email" required placeholder=" " />
+  <label>Email</label>
+</div>
+<div class="input-group">
+  <input type="password" required placeholder=" " />
+  <label>Password</label>
+</div>
+<div class="input-group">
+  <input type="password" required placeholder=" " />
+  <label>Confirm Password</label>
+</div>
+
+                <button class="btn" type="submit">Register</button>
+                <div class="links">
+                    <a href="login.html" class="link-btn">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+   <!-- Firebase and Auth Script -->
+   <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCAv4QSlu4N8yYhJ81hWh_DQcDRUZFEDBk",
+      authDomain: "login-form-739ab.firebaseapp.com",
+      projectId: "login-form-739ab",
+      storageBucket: "login-form-739ab.firebasestorage.app",
+      messagingSenderId: "812982247744",
+      appId: "1:812982247744:web:0404a33ede46a4b6511aa5",
+      measurementId: "G-7R5ZNNVJDP"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    getAnalytics(app);
+    const auth = getAuth(app);
+
+    // Register form handling
+    const form = document.querySelector("form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fullName = form.querySelector('input[type="text"]').value;
+      const email = form.querySelector('input[type="email"]').value;
+      const password = form.querySelectorAll('input[type="password"]')[0].value;
+      const confirmPassword = form.querySelectorAll('input[type="password"]')[1].value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: fullName });
+        alert("Registration successful!");
+        window.location.href = "login.html";
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+   </script>
+</body>
+</html>

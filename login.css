@@ -1,0 +1,169 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2366a8 0%, #264653 100%);
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('farmer1.avif') no-repeat center/cover;
+  filter: brightness(1) blur(0px);
+  opacity: 1;
+  z-index: -1;
+}
+
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.glass-box {
+  width: 370px;
+  padding: 36px 28px 28px 28px;
+  background: rgba(255,255,255,0.13);
+  backdrop-filter: blur(15px);
+  border-radius: 19px;
+  box-shadow: 0 10px 38px rgba(38,70,83,0.20),
+              0 1px 12px rgba(42,157,143,0.08);
+  text-align: center;
+  animation: fadeIn 0.7s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: none;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: #183153;
+}
+
+.subtitle {
+  font-size: 1.04rem;
+  margin-bottom: 14px;
+  color: #2a9d8f;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 10px 4px 12px; /* top, right, bottom, left */
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.68);
+  background: transparent;
+  color: #223843;
+  font-size: 1.08rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  border-bottom-color: #2a9d8f;
+}
+
+.input-group label {
+  position: absolute;
+  left: 12px;
+  bottom: 6px; /* keeps label visibly inside input */
+  font-size: 1rem;
+  color: #2a9d8f;
+  pointer-events: none;
+  font-weight: 500;
+  transition: 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  bottom: 32px;
+  font-size: 12px;
+  color: #43ba86;
+  font-weight: 600;
+}
+
+.btn {
+  width: 100%;
+  padding: 16px 0;
+  margin-top: 17px;
+  border: none;
+  border-radius: 32px;
+  background: linear-gradient(90deg, #41d09e 0%, #1b414d 100%);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 15px #22577a22;
+  transition: background 0.3s, transform 0.2s;
+  letter-spacing: 1px;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+}
+
+.btn:hover,
+.btn:focus {
+  background: linear-gradient(90deg, #1b414d 0%, #41d09e 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.links {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.link-btn {
+  width: 100%;
+  padding: 11px 0;
+  border-radius: 25px;
+  background: rgba(42,157,143,0.19);
+  border: 1px solid rgba(255,255,255,0.13);
+  text-align: center;
+  color: #43ba86;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.link-btn:hover,
+.link-btn:focus {
+  background: #43ba86;
+  color: #fff;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(24px);}
+  to   { opacity: 1; transform: translateY(0);}
+}

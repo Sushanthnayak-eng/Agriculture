@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agriconnect Login</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="glass-box">
+      <h2 class="title">Welcome Back</h2>
+      <p class="subtitle">Login to your Agriconnect account</p>
+      <form>
+        <div class="input-group">
+          <input type="email" required placeholder=" " />
+          <label>Email</label>
+        </div>
+        <div class="input-group">
+          <input type="password" required placeholder=" " />
+          <label>Password</label>
+        </div>
+        <button class="btn" type="submit">Login</button>
+        <div class="links">
+          <a href="#" id="forgotPasswordLink" class="link-btn">Forgot Password?</a>
+          <a href="register.html" class="link-btn">Create New Account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase and Auth Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+    import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+// --- Your existing login form handler goes above ---
+
+const forgotLink = document.getElementById('forgotPasswordLink');
+forgotLink.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const email = prompt("Enter your email to reset your password:");
+  if (email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("A password reset link has been sent to " + email);
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+});
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCAv4QSlu4N8yYhJ81hWh_DQcDRUZFEDBk",
+      authDomain: "login-form-739ab.firebaseapp.com",
+      projectId: "login-form-739ab",
+      storageBucket: "login-form-739ab.firebasestorage.app",
+      messagingSenderId: "812982247744",
+      appId: "1:812982247744:web:0404a33ede46a4b6511aa5",
+      measurementId: "G-7R5ZNNVJDP"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    getAnalytics(app);
+    const auth = getAuth(app);
+
+    // Login form handling
+    const form = document.querySelector("form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input[type="email"]').value;
+      const password = form.querySelector('input[type="password"]').value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        window.location.href = "home.html";
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+  </script>
+</body>
+</html>
